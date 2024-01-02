@@ -1452,12 +1452,18 @@ void G_ScreenShot (void)
 
 
 // DOOM Par Times
-static const int pars[4][10] =
+static const int pars[7][10] =
 { 
     {0}, 
     {0,30,75,120,90,165,180,180,30,165}, 
     {0,90,90,90,120,90,360,240,30,170}, 
     {0,90,45,90,150,90,90,165,30,135} 
+    // [crispy] Episode 4 par times from the BFG Edition
+   ,{0,165,255,135,150,180,390,135,360,180}
+    // [crispy] Episode 5 par times from Sigil v1.21
+   ,{0,90,150,360,420,780,420,780,300,660}
+    // [crispy] Episode 6 par times from Sigil II v1.0
+   ,{0,480,300,240,420,510,840,960,390,450}
 }; 
 
 // DOOM II Par Times
@@ -1475,14 +1481,6 @@ static const int chexpars[6] =
     0,120,360,480,200,360
 }; 
  
-
-// [crispy] Episode 5 par times from Sigil v1.21
-static int e5pars[10] =
-{
-    0,90,150,360,420,780,420,780,300,660
-};
-
-
 //
 // G_DoCompleted 
 //
@@ -1604,6 +1602,7 @@ void G_DoCompleted (void)
 	    switch (gameepisode) 
 	    { 
 	      case 1: 
+	      case 6:
 		wminfo.next = 3; 
 		break; 
 	      case 2: 
@@ -1648,7 +1647,13 @@ void G_DoCompleted (void)
     }
     // Doom episode 4 doesn't have a par time, so this
     // overflows into the cpars array.
-    else if (gameepisode < 4)
+    else if (gameepisode < 4 ||
+        // [crispy] par times for episode 4
+        gameepisode == 4 ||
+        // [crispy] par times for Sigil
+        gameepisode == 5 ||
+        // [crispy] par times for Sigil II
+        gameepisode == 6)
     {
         if (gameversion == exe_chex && gameepisode == 1 && gamemap < 6)
         {
@@ -1658,11 +1663,6 @@ void G_DoCompleted (void)
         {
             wminfo.partime = TICRATE*pars[gameepisode][gamemap];
         }
-    }
-    // [crispy] use episode 3 par times for Sigil's episode 5
-    else if (gameepisode == 5)
-    {
-        wminfo.partime = TICRATE*e5pars[gamemap];
     }
     else
     {
@@ -2092,6 +2092,13 @@ G_InitNew
             break;
           case 5:        // [crispy] Sigil
             skytexturename = "SKY5_ZD";
+            if (R_CheckTextureNumForName(DEH_String(skytexturename)) == -1)
+            {
+                skytexturename = "SKY3";
+            }
+            break;
+          case 6:        // [crispy] Sigil II
+            skytexturename = "SKY6_ZD";
             if (R_CheckTextureNumForName(DEH_String(skytexturename)) == -1)
             {
                 skytexturename = "SKY3";

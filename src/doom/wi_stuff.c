@@ -1473,6 +1473,36 @@ void WI_updateStats(void)
 
 }
 
+// [crispy] conditionally draw par times on intermission screen
+static boolean WI_drawParTime (void)
+{
+	boolean result = true;
+
+	if (gamemode == commercial)
+	{
+		// [crispy] IWAD: Final Doom has no par times
+		if (gamemission == pack_tnt || gamemission == pack_plut)
+		{
+			result = false;
+		}
+	}
+	else
+	{
+		// [crispy] IWAD: Episode 4 has par times
+		if (wbs->epsd == 3)
+		{
+			result = true;
+		}
+		// [crispy] PWAD: par times for Sigil
+		if (wbs->epsd == 4 || wbs->epsd == 5)
+		{
+			result = true;
+		}
+	}
+
+	return result;
+}
+
 void WI_drawStats(void)
 {
     // line height
@@ -1499,7 +1529,8 @@ void WI_drawStats(void)
     V_DrawPatch(SP_TIMEX, SP_TIMEY, timepatch);
     WI_drawTime(SCREENWIDTH/2 - SP_TIMEX, SP_TIMEY, cnt_time);
 
-    if (wbs->epsd < 3)
+    // [crispy] conditionally draw par times on intermission screen
+    if (WI_drawParTime())
     {
         V_DrawPatch(SCREENWIDTH/2 + SP_TIMEX, SP_TIMEY, par);
         WI_drawTime(SCREENWIDTH - SP_TIMEX, SP_TIMEY, cnt_par);
@@ -1555,6 +1586,12 @@ void WI_Ticker(void)
 	// intermission music
   	if ( gamemode == commercial )
 	  S_ChangeMusic(mus_dm2int, true);
+	// [crispy] Sigil
+	else if (haved1e5 && wbs->epsd == 4 && W_CheckNumForName(DEH_String("D_SIGINT")) != -1)
+	  S_ChangeMusic(mus_sigint, true);
+	// [crispy] Sigil II
+	else if (haved1e6 && wbs->epsd == 5 && W_CheckNumForName(DEH_String("D_SG2INT")) != -1)
+	  S_ChangeMusic(mus_sg2int, true);
 	else
 	  S_ChangeMusic(mus_inter, true); 
     }
@@ -1731,6 +1768,10 @@ static void WI_loadUnloadData(load_callback_t callback)
     else if (haved1e5 && wbs->epsd == 4 && W_CheckNumForName(DEH_String("SIGILINT")) != -1) // [crispy] Sigil
     {
         M_StringCopy(name, DEH_String("SIGILINT"), sizeof(name));
+    }
+    else if (haved1e6 && wbs->epsd == 5 && W_CheckNumForName(DEH_String("SIGILIN2")) != -1) // [crispy] Sigil
+    {
+        M_StringCopy(name, DEH_String("SIGILIN2"), sizeof(name));
     }
     else
     {

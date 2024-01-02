@@ -1696,6 +1696,10 @@ static boolean CheckBossEnd(mobjtype_t motype)
             case 5:
                 return false;
 
+            // [crispy] Sigil II
+            case 6:
+                return false;
+
             default:
                 return gamemap == 8;
 	}

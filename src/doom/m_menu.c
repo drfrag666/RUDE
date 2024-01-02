@@ -267,6 +267,7 @@ enum
     ep3,
     ep4,
     ep5, // [crispy] Sigil
+    ep6, // [crispy] Sigil II
     ep_end
 } episodes_e;
 
@@ -277,6 +278,17 @@ menuitem_t EpisodeMenu[]=
     {1,"M_EPI3", M_Episode,'i'},
     {1,"M_EPI4", M_Episode,'t'}
    ,{1,"M_EPI5", M_Episode,'s'} // [crispy] Sigil
+   ,{1,"M_EPI6", M_Episode,'s'} // [crispy] Sigil II
+};
+
+// [crispy] have Sigil II but not Sigil
+menuitem_t EpisodeMenuSII[]=
+{
+    {1,"M_EPI1", M_Episode,'k'},
+    {1,"M_EPI2", M_Episode,'t'},
+    {1,"M_EPI3", M_Episode,'i'},
+    {1,"M_EPI4", M_Episode,'t'}
+   ,{1,"M_EPI6", M_Episode,'s'} // [crispy] Sigil II
 };
 
 menu_t  EpiDef =
@@ -1003,6 +1015,9 @@ void M_Episode(int choice)
     }
 
     epi = choice;
+    // [crispy] have Sigil II loaded but not Sigil
+    if (epi == 4 && haved1e6 && !haved1e5)
+        epi = 5;
     M_SetupNextMenu(&NewDef);
 }
 
@@ -2195,9 +2210,17 @@ void M_Init (void)
     }
 
     // [crispy] Sigil
-    if (!haved1e5)
+    if (!haved1e5 && !haved1e6)
     {
         EpiDef.numitems = 4;
+    }
+    else if (haved1e5 != haved1e6)
+    {
+        EpiDef.numitems = 5;
+        if (haved1e6)
+        {
+            EpiDef.menuitems = EpisodeMenuSII;
+        }
     }
 
     // Versions of doom.exe before the Ultimate Doom release only had

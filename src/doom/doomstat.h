@@ -72,6 +72,7 @@ extern  boolean	modifiedgame;
 
 // [crispy] Sigil
 extern boolean haved1e5;
+extern boolean haved1e6;
 
 // -------------------------------------------
 // Selected skill type, map etc.

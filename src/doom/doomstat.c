@@ -32,3 +32,4 @@ boolean	modifiedgame;
 
 // [crispy] Sigil
 boolean haved1e5;
+boolean haved1e6;

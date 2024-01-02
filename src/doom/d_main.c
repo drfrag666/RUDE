@@ -1923,6 +1923,12 @@ void D_DoomMain (void)
                        (W_CheckNumForName("e5m1") != -1) &&
                        (W_CheckNumForName("wilv40") != -1);
 
+    // [crispy] check for presence of a 6th episode
+    haved1e6 = (gameversion == exe_ultimate) &&
+                       (W_CheckNumForName("m_epi6") != -1) &&
+                       (W_CheckNumForName("e6m1") != -1) &&
+                       (W_CheckNumForName("wilv50") != -1);
+
     printf ("NET_Init: Init network subsystem.\n");
     NET_Init ();
 
