@@ -462,7 +462,7 @@ void V_DrawTLPatch(int x, int y, patch_t * patch)
 
             while (count--)
             {
-                *dest = tinttable[((*dest) << 8) + *source++];
+                *dest = tinttable[*dest + ((*source++) << 8)];
                 dest += screenwidth;
             }
             column = (column_t *) ((byte *) column + column->length + 4);

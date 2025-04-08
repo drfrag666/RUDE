@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <assert.h>
+#include <locale.h>
 
 #include "SDL_filesystem.h"
 
@@ -1091,6 +1092,14 @@ static default_t extra_defaults_list[] =
     CONFIG_VARIABLE_INT(mouseb_invright),
 
     //!
+    // @game heretic hexen
+    //
+    // Mouse button to use artifact.
+    //
+
+    CONFIG_VARIABLE_INT(mouseb_useartifact),
+
+    //!
     // If non-zero, double-clicking a mouse button acts like pressing
     // the "use" key to use an object in-game, eg. a door or switch.
     //
@@ -2055,7 +2064,41 @@ static void SetVariable(default_t *def, const char *value)
             break;
 
         case DEFAULT_FLOAT:
-            *def->location.f = (float) atof(value);
+        {
+            // Different locales use different decimal separators.
+            // However, the choice of the current locale isn't always
+            // under our own control. If the atof() function fails to
+            // parse the string representing the floating point number
+            // using the current locale's decimal separator, it will
+            // return 0, resulting in silent sound effects. To
+            // mitigate this, we replace the first non-digit,
+            // non-minus character in the string with the current
+            // locale's decimal separator before passing it to atof().
+            struct lconv *lc = localeconv();
+            char dec, *str;
+            int i = 0;
+
+            dec = lc->decimal_point[0];
+            str = M_StringDuplicate(value);
+
+            // Skip sign indicators.
+            if (str[i] == '-' || str[i] == '+')
+            {
+                i++;
+            }
+
+            for ( ; str[i] != '\0'; i++)
+            {
+                if (!isdigit(str[i]))
+                {
+                    str[i] = dec;
+                    break;
+                }
+            }
+
+            *def->location.f = (float) atof(str);
+            free(str);
+        }
             break;
     }
 }
@@ -2433,6 +2476,11 @@ void M_SetMusicPackDir(void)
     }
 
     prefdir = SDL_GetPrefPath("", PACKAGE_TARNAME);
+    if (prefdir == NULL)
+    {
+        printf("M_SetMusicPackDir: SDL_GetPrefPath failed, music pack directory not set\n");
+        return;
+    }
     music_pack_path = M_StringJoin(prefdir, "music-packs", NULL);
 
     M_MakeDirectory(prefdir);
@@ -2529,6 +2577,11 @@ char *M_GetAutoloadDir(const char *iwadname)
     {
         char *prefdir;
         prefdir = SDL_GetPrefPath("", PACKAGE_TARNAME);
+        if (prefdir == NULL)
+        {
+            printf("M_GetAutoloadDir: SDL_GetPrefPath failed\n");
+            return NULL;
+        }
         autoload_path = M_StringJoin(prefdir, "autoload", NULL);
         SDL_free(prefdir);
     }
