@@ -3,7 +3,7 @@ AC_INIT(RUDE, 3.1.0,
 
 PACKAGE_SHORTNAME=${PACKAGE_NAME% Doom}
 PACKAGE_SHORTDESC="Conservative source port"
-PACKAGE_COPYRIGHT="Copyright (C) 1993-2021"
+PACKAGE_COPYRIGHT="Copyright (C) 1993-2022"
 PACKAGE_LICENSE="GNU General Public License, version 2"
 PACKAGE_MAINTAINER="drfrag"
 PACKAGE_URL="https://github.com/drfrag666/chocolate-doom/releases"
@@ -119,6 +119,13 @@ AS_IF([test "x$with_libpng" != xno], [
 # Use the specific library CFLAGS/LIBS variables instead of setting them here.
 CFLAGS="$CFLAGS $SDL_CFLAGS ${SAMPLERATE_CFLAGS:-} ${PNG_CFLAGS:-}"
 LDFLAGS="$LDFLAGS $SDL_LIBS ${SAMPLERATE_LIBS:-} ${PNG_LIBS:-}"
+case "$host" in
+  *-*-mingw* | *-*-cygwin* | *-*-msvc* )
+    LDFLAGS="$LDFLAGS -lwinmm"
+    ;;
+  *)
+esac
+
 AC_CHECK_LIB(m, log)
 
 AC_CHECK_HEADERS([dirent.h linux/kd.h dev/isa/spkrio.h dev/speaker/speaker.h])
@@ -173,7 +180,7 @@ AC_DEFINE_UNQUOTED(PROGRAM_PREFIX, "$PROGRAM_PREFIX",
                    Change this when you create your awesome forked version)
 AC_SUBST(PROGRAM_SPREFIX)
 
-AM_CONFIG_HEADER(config.h:config.hin)
+AC_CONFIG_HEADERS(config.h:config.hin)
 
 AC_SUBST(WINDOWS_RC_VERSION)
 AC_SUBST(SDLMIXER_CFLAGS)
@@ -196,7 +203,7 @@ AC_SUBST(PACKAGE_BUGREPORT)
 dnl Shut up the datarootdir warnings.
 AC_DEFUN([AC_DATAROOTDIR_CHECKED])
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 man/Makefile
 man/bash-completion/Makefile
@@ -204,7 +211,6 @@ man/bash-completion/doom.template
 man/bash-completion/heretic.template
 man/bash-completion/hexen.template
 man/bash-completion/strife.template
-midiproc/Makefile
 opl/Makefile
 opl/examples/Makefile
 pcsound/Makefile
@@ -236,4 +242,4 @@ textscreen/Makefile
 textscreen/examples/Makefile
 textscreen/fonts/Makefile
 ])
-
+AC_OUTPUT
