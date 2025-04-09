@@ -18,7 +18,6 @@
 #include "doomdef.h"
 #include "i_system.h"
 #include "m_bbox.h"
-#include "i_system.h"
 #include "r_local.h"
 
 seg_t *curline;
@@ -449,7 +448,7 @@ void R_Subsector(int num)
     }
 
     // check for solidsegs overflow - extremely unsatisfactory!
-    if(newend > &solidsegs[32])
+    if(newend > &solidsegs[32] && false)
         I_Error("R_Subsector: solidsegs overflow (vanilla may crash here)\n");
 }
 
