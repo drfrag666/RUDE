@@ -888,7 +888,7 @@ void WritePNGfile(char *filename, pixel_t *data,
     byte *rowbuf;
     extern void I_RenderReadPixels(byte **data, int *w, int *h, int *p);
 
-    handle = fopen(filename, "wb");
+    handle = M_fopen(filename, "wb");
     if (!handle)
     {
         return;

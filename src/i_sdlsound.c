@@ -566,7 +566,7 @@ static void WriteWAV(char *filename, byte *data,
     unsigned int i;
     unsigned short s;
 
-    wav = fopen(filename, "wb");
+    wav = M_fopen(filename, "wb");
 
     // Header
 
