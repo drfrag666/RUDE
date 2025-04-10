@@ -34,6 +34,10 @@
 
 #include "opl_queue.h"
 
+
+#ifndef DISABLE_SDL2MIXER
+
+
 #define MAX_SOUND_SLICE_TIME 100 /* ms */
 
 typedef struct
@@ -512,3 +516,5 @@ opl_driver_t opl_sdl_driver =
     OPL_SDL_AdjustCallbacks,
 };
 
+
+#endif // DISABLE_SDL2MIXER
