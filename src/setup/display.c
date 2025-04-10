@@ -235,7 +235,7 @@ static void AdvancedDisplayConfig(TXT_UNCAST_ARG(widget),
     if (gamemission == doom)
     {
         TXT_AddWidget(window,
-                      TXT_NewCheckBox("LCD gamma fix", &lcd_gamma_fix));
+                      TXT_NewCheckBox("Custom darker palette for LCD", &lcd_gamma_fix));
     }
 
     // [JN] [Crispy] Widescreen
