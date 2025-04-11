@@ -80,6 +80,8 @@
 
 #include "d_main.h"
 
+#include "strife_icon.c"
+
 //
 // D-DoomLoop()
 // Not a globally visible function,
@@ -111,12 +113,6 @@ boolean         randomparm;     // [STRIFE] haleyjd 20130915: checkparm of -rand
 
 boolean         showintro = true;   // [STRIFE] checkparm of -nograph, disables intro
 
-
-//extern int soundVolume;
-//extern  int	sfxVolume;
-//extern  int	musicVolume;
-
-extern  boolean	inhelpscreens;
 
 skill_t		startskill;
 int             startepisode;
@@ -203,9 +199,6 @@ void D_ProcessEvents (void)
 // * 20110206: Start wipegamestate at GS_UNKNOWN (STRIFE-TODO: rename?)
 //
 gamestate_t     wipegamestate = GS_UNKNOWN;
-extern  boolean setsizeneeded;
-//extern  int             showMessages; [STRIFE] no such variable
-void R_ExecuteSetViewSize (void);
 
 void D_Display (void)
 {
@@ -528,6 +521,7 @@ void D_DoomLoop (void)
 
     if (!showintro)
     {
+        I_RegisterWindowIcon(strife_icon_data, strife_icon_w, strife_icon_h);
         I_InitGraphics();
     }
 
@@ -1299,6 +1293,7 @@ static void D_InitIntroSequence(void)
         // In vanilla Strife, Mode 13h was initialized directly in D_DoomMain.
         // We have to be a little more courteous of the low-level code here.
         I_SetGrabMouseCallback(D_StartupGrabCallback);
+        I_RegisterWindowIcon(strife_icon_data, strife_icon_h, strife_icon_w);
         I_InitGraphics();
         V_RestoreBuffer(); // make the V_ routines work
 
@@ -1704,8 +1699,6 @@ void D_DoomMain (void)
     if ( (p=M_CheckParm ("-turbo")) )
     {
         int     scale = 200;
-        extern int forwardmove[2];
-        extern int sidemove[2];
 
         if (p<myargc-1)
             scale = atoi (myargv[p+1]);
