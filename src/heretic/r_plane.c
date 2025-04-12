@@ -404,9 +404,6 @@ void R_DrawPlanes(void)
     int count;
     fixed_t frac, fracstep;
 
-    extern byte *ylookup[MAXHEIGHT];
-    extern int columnofs[MAXWIDTH];
-
 #ifdef RANGECHECK
     if (ds_p - drawsegs > numdrawsegs)
         I_Error("R_DrawPlanes: drawsegs overflow (%" PRIiPTR ")",

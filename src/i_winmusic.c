@@ -19,6 +19,7 @@
 
 #include <windows.h>
 #include <mmsystem.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -26,6 +27,9 @@
 #include "doomtype.h"
 #include "m_misc.h"
 #include "midifile.h"
+#include "i_sound.h"
+#include "i_winmusic.h"
+
 
 #define BETWEEN(l,u,x) (((l)>(x))?(l):((x)>(u))?(u):(x))
 

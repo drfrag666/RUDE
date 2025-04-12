@@ -1010,7 +1010,6 @@ void G_Ticker (void)
              && turbodetected[i])
             {
                 static char turbomessage[80];
-                extern char *player_names[4];
                 M_snprintf(turbomessage, sizeof(turbomessage),
                            "%s is turbo!", player_names[i]);
                 players[consoleplayer].message = turbomessage;
@@ -1437,7 +1436,6 @@ static int e5pars[10] =
 // G_DoCompleted 
 //
 boolean		secretexit; 
-extern char*	pagename; 
  
 void G_ExitLevel (void) 
 { 
@@ -1692,8 +1690,6 @@ void G_DoWorldDone (void)
 // G_InitFromSavegame
 // Can be called by the startup code or the menu task. 
 //
-extern boolean setsizeneeded;
-void R_ExecuteSetViewSize (void);
 
 char	savename[256];
 

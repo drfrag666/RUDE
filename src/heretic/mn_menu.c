@@ -31,6 +31,7 @@
 #include "r_local.h"
 #include "s_sound.h"
 #include "v_video.h"
+#include "am_map.h"
 
 // Macros
 
@@ -116,10 +117,6 @@ static void DrawSaveMenu(void);
 static void DrawSlider(Menu_t * menu, int item, int width, int slot);
 void MN_LoadSlotText(void);
 
-// External Data
-
-extern int detailLevel;
-extern int screenblocks;
 
 // Public Data
 
@@ -1043,9 +1040,6 @@ boolean MN_Responder(event_t * event)
     int key;
     int i;
     MenuItem_t *item;
-    extern boolean automapactive;
-    extern void D_StartTitle(void);
-    extern void G_CheckDemoStatus(void);
     char *textBuffer;
 
     // In testcontrols mode, none of the function keys should do anything

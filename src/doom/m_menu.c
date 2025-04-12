@@ -61,11 +61,6 @@
 #include "m_menu.h"
 
 
-extern patch_t*		hu_font[HU_FONTSIZE];
-extern boolean		message_dontfuckwithme;
-
-extern boolean		chat_on;		// in heads-up code
-
 boolean insavemenu; // redraw status bar
 
 //
@@ -125,7 +120,6 @@ boolean			menuactive;
 #define SKULLXOFF		-32
 #define LINEHEIGHT		16
 
-extern boolean		sendpause;
 char			savegamestrings[10][SAVESTRINGSIZE];
 
 char	endstring[160];
@@ -1982,7 +1976,6 @@ void M_StartControlPanel (void)
 
 static void M_DrawOPLDev(void)
 {
-    extern void I_OPL_DevMessages(char *, size_t);
     char debug[1024];
     char *curr, *p;
     int line;

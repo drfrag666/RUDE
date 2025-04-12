@@ -127,8 +127,11 @@ typedef enum
 ===============================================================================
 */
 
+
+struct thinker_s;
+
 // think_t is a function pointer to a routine to handle an actor
-typedef void (*think_t) ();
+typedef void (*think_t) (struct thinker_s *);
 
 typedef struct thinker_s
 {
@@ -302,7 +305,7 @@ typedef enum
     key_yellow,
     key_green,
     key_blue,
-    NUMKEYS
+    NUM_KEY_TYPES
 } keytype_t;
 
 typedef enum
@@ -439,7 +442,7 @@ typedef struct player_s
     int artifactCount;
     int inventorySlotNum;
     int powers[NUMPOWERS];
-    boolean keys[NUMKEYS];
+    boolean keys[NUM_KEY_TYPES];
     boolean backpack;
     signed int frags[MAXPLAYERS];       // kills of other players
     weapontype_t readyweapon;
@@ -508,6 +511,10 @@ extern boolean altpal;          // checkparm to use an alternate palette routine
 
 extern boolean cdrom;           // true if cd-rom mode active ("-cdrom")
 
+extern boolean noartiskip;      // whether shift-enter skips an artifact
+
+extern boolean viewactive;
+
 extern boolean deathmatch;      // only if started as net death
 
 extern boolean netgame;         // only true if >1 player
@@ -566,6 +573,7 @@ extern skill_t startskill;
 extern int startepisode;
 extern int startmap;
 extern boolean autostart;
+extern boolean advancedemo;
 
 extern boolean testcontrols;
 extern int testcontrols_mousespeed;
@@ -587,6 +595,7 @@ extern int vanilla_demo_limit;
 //BASE LEVEL
 //----------
 void D_DoomMain(void);
+void CheckAbortStartup(void);
 void IncThermo(void);
 void InitThermo(int max);
 void tprintf(const char *string, int initflag);
@@ -601,6 +610,9 @@ void D_DoomLoop(void);
 // manages timing and IO
 // calls all ?_Responder, ?_Ticker, and ?_Drawer functions
 // calls I_GetTime, I_StartFrame, and I_StartTic
+
+void D_StartTitle(void);
+
 
 //---------
 //SYSTEM IO
@@ -685,11 +697,17 @@ void G_RecordDemo(skill_t skill, int numplayers, int episode, int map,
 
 void G_PlayDemo(char *name);
 void G_TimeDemo(char *name);
+boolean G_CheckDemoStatus(void);
+void D_DoAdvanceDemo(void);
 
 void G_ExitLevel(void);
 void G_SecretExitLevel(void);
 
+void D_ProcessEvents(void);
+
 void G_WorldDone(void);
+
+void G_BuildTiccmd(ticcmd_t *cmd, int maketic);
 
 void G_Ticker(void);
 boolean G_Responder(event_t * ev);
@@ -802,6 +820,13 @@ void F_StartFinale(void);
 // STATUS BAR (SB_bar.c)
 //----------------------
 
+
+extern boolean inventory;
+extern int curpos;
+extern int inv_ptr;
+extern int playerkeys;
+
+
 void SB_Init(void);
 boolean SB_Responder(event_t * event);
 void SB_Ticker(void);
@@ -811,6 +836,7 @@ void SB_Drawer(void);
 // MENU (MN_menu.c)
 //-----------------
 
+extern boolean askforquit;
 extern boolean MenuActive;
 
 void MN_Init(void);

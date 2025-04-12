@@ -22,6 +22,7 @@
 
 #include "deh_main.h"
 #include "doomdef.h"
+#include "doomstat.h"
 
 #include "z_zone.h"
 #include "v_video.h"
@@ -36,10 +37,7 @@
 #include "r_local.h"
 
 
-// in AM_map.c
-extern boolean		automapactive; 
 extern int screenblocks;
-
 
 
 //

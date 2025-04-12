@@ -49,4 +49,8 @@ int R_FlatNumForName(const char *name);
 int R_TextureNumForName(const char *name);
 int R_CheckTextureNumForName(const char *name);
 
+
+extern int numflats;
+
+
 #endif

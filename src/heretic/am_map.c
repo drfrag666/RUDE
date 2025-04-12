@@ -30,7 +30,7 @@
 #include "doomkeys.h"
 #include "v_video.h"
 
-vertex_t KeyPoints[NUMKEYS];
+vertex_t KeyPoints[NUM_KEY_TYPES];
 
 #define NUMALIAS 3              // Number of antialiased lines.
 
@@ -145,8 +145,6 @@ static int followplayer = 1;    // specifies whether to follow the player around
 static char cheat_amap[] = { 'r', 'a', 'v', 'm', 'a', 'p' };
 
 static byte cheatcount = 0;
-
-extern boolean viewactive;
 
 static byte antialias[NUMALIAS][8] = {
     {96, 97, 98, 99, 100, 101, 102, 103},

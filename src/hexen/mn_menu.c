@@ -30,6 +30,8 @@
 #include "r_local.h"
 #include "s_sound.h"
 #include "v_video.h"
+#include "am_map.h"
+
 
 // MACROS ------------------------------------------------------------------
 
@@ -122,8 +124,6 @@ void MN_LoadSlotText(void);
 
 // EXTERNAL DATA DECLARATIONS ----------------------------------------------
 
-extern int detailLevel;
-extern boolean gamekeydown[256];        // The NUMKEYS macro is local to g_game
 
 // PUBLIC DATA DEFINITIONS -------------------------------------------------
 
@@ -1146,9 +1146,6 @@ boolean MN_Responder(event_t * event)
     int charTyped;
     int i;
     MenuItem_t *item;
-    extern boolean automapactive;
-    extern void H2_StartTitle(void);
-    extern void G_CheckDemoStatus(void);
     char *textBuffer;
 
     // In testcontrols mode, none of the function keys should do anything

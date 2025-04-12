@@ -33,6 +33,7 @@
 #include "hu_lib.h"
 #include "m_controls.h"
 #include "m_misc.h"
+#include "m_menu.h"
 #include "w_wad.h"
 
 #include "s_sound.h"
@@ -91,7 +92,6 @@ static boolean		message_nottobefuckedwith;
 static hu_stext_t	w_message;
 static int		message_counter;
 
-extern int		showMessages;
 
 static boolean		headsupactive = false;
 
