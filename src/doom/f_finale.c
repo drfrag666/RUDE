@@ -295,7 +295,7 @@ void F_TextWrite (void)
 	}
 		
 	c = toupper(c) - HU_FONTSTART;
-	if (c < 0 || c> HU_FONTSIZE)
+	if (c < 0 || c >= HU_FONTSIZE)
 	{
 	    cx += 4;
 	    continue;
@@ -519,7 +519,7 @@ void F_CastPrint (const char *text)
 	if (!c)
 	    break;
 	c = toupper(c) - HU_FONTSTART;
-	if (c < 0 || c> HU_FONTSIZE)
+	if (c < 0 || c >= HU_FONTSIZE)
 	{
 	    width += 4;
 	    continue;
@@ -538,7 +538,7 @@ void F_CastPrint (const char *text)
 	if (!c)
 	    break;
 	c = toupper(c) - HU_FONTSTART;
-	if (c < 0 || c> HU_FONTSIZE)
+	if (c < 0 || c >= HU_FONTSIZE)
 	{
 	    cx += 4;
 	    continue;

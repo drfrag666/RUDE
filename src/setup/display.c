@@ -70,6 +70,7 @@ static txt_dropdown_list_t *widebutton;
 
 static char *video_driver = "";
 static char *window_position = "";
+static int video_display = 0;
 static int aspect_ratio_correct = 1;
 static int integer_scaling = 0;
 static int vga_porch_flash = 0;
@@ -288,6 +289,7 @@ void ConfigDisplay(TXT_UNCAST_ARG(widget), void *user_data)
 
 void BindDisplayVariables(void)
 {
+    M_BindIntVariable("video_display",             &video_display);
     M_BindIntVariable("aspect_ratio_correct",      &aspect_ratio_correct);
     M_BindIntVariable("integer_scaling",           &integer_scaling);
     M_BindIntVariable("fullscreen",                &fullscreen);

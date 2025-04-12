@@ -68,6 +68,7 @@ deh_str.c            deh_str.h             \
 gusconf.c            gusconf.h             \
 i_cdmus.c            i_cdmus.h             \
 i_endoom.c           i_endoom.h            \
+i_flmusic.c                                \
 i_glob.c             i_glob.h              \
 i_input.c            i_input.h             \
 i_joystick.c         i_joystick.h          \
@@ -81,7 +82,8 @@ i_sound.c            i_sound.h             \
 i_timer.c            i_timer.h             \
 i_video.c            i_video.h             \
 i_videohr.c          i_videohr.h           \
-i_winmusic.c         i_winmusic.h          \
+i_winmusic.c                               \
+midifallback.c       midifallback.h        \
 midifile.c           midifile.h            \
 mus2mid.c            mus2mid.h             \
 m_bbox.c             m_bbox.h              \
@@ -276,7 +278,7 @@ screensaver_DATA = @PACKAGE_RDNS@.Doom_Screensaver.desktop
 @PACKAGE_RDNS@.Doom_Screensaver.desktop: Doom_Screensaver.desktop
 	cp Doom_Screensaver.desktop $@
 
-CLEANFILES = $(execgames_SCRIPTS) $(app_DATA) $(screensaver_DATA)
+CLEANFILES = $(execgames_SCRIPTS) $(metainfo_DATA) $(app_DATA) $(screensaver_DATA)
 
 .rc.o:
 	$(WINDRES) $< -o $@
