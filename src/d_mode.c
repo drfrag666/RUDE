@@ -134,6 +134,7 @@ static struct {
     { doom,     net_chex },
     { heretic,  net_heretic_1_3 },
     { hexen,    net_hexen_1_1 },
+    { hexen,    net_hexen_1_1r2 },
     { strife,   net_strife_1_2 },
     { strife,   net_strife_1_31 },
 };
@@ -181,6 +182,7 @@ const NetGameVersion_t game_to_net_version_table[] =
     net_heretic_1_3,
 
     net_hexen_1_1,
+    net_hexen_1_1r2,
     net_strife_1_2,
     net_strife_1_31
 };

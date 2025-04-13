@@ -74,6 +74,7 @@ typedef enum
     exe_heretic_1_3, // Heretic 1.3
 
     exe_hexen_1_1,   // Hexen 1.1
+    exe_hexen_1_1r2, // Hexen 1.1 (alternate exe)
     exe_strife_1_2,  // Strife v1.2
     exe_strife_1_31  // Strife v1.31
 } GameVersion_t;
@@ -98,6 +99,7 @@ typedef enum
     net_heretic_1_3, // Heretic 1.3
 
     net_hexen_1_1,   // Hexen 1.1
+    net_hexen_1_1r2, // Hexen 1.1 (alternate)
     net_strife_1_2,  // Strife v1.2
     net_strife_1_31,  // Strife v1.31
 
