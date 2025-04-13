@@ -63,6 +63,7 @@ static int actualwidth;
 
 // These are (1) the window (or the full screen) that our game is rendered to
 // and (2) the renderer that scales the texture (see below) into this window.
+
 static SDL_Window *screen;
 static SDL_Renderer *renderer;
 
@@ -998,10 +999,20 @@ void I_InitWindowIcon(void)
 
 static void SetScaleFactor(int factor)
 {
+    int height;
+
     // Pick 320x200 or 320x240, depending on aspect ratio correct
+    if (aspect_ratio_correct)
+    {
+        height = SCREENHEIGHT_4_3;
+    }
+    else
+    {
+        height = SCREENHEIGHT;
+    }
 
     window_width = factor * actualwidth;
-    window_height = factor * actualheight;
+    window_height = factor * height;
     fullscreen = false;
 }
 
