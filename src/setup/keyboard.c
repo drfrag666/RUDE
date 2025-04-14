@@ -191,7 +191,8 @@ static void ConfigExtraKeys(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
     txt_window_t *window;
     txt_scrollpane_t *scrollpane;
     txt_table_t *table;
-    boolean extra_keys = gamemission == heretic
+    boolean extra_keys = gamemission == doom
+                   	  || gamemission == heretic
                       || gamemission == hexen
                       || gamemission == strife;
 
@@ -218,11 +219,11 @@ static void ConfigExtraKeys(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
 
         if (gamemission == heretic || gamemission == hexen || gamemission == strife)
         {
-        AddSectionLabel(table, "View", false);
+            AddSectionLabel(table, "View", true);
 
-        AddKeyControl(table, "Look up", &key_lookup);
-        AddKeyControl(table, "Look down", &key_lookdown);
-        AddKeyControl(table, "Center view", &key_lookcenter);
+            AddKeyControl(table, "Look up", &key_lookup);
+            AddKeyControl(table, "Look down", &key_lookdown);
+            AddKeyControl(table, "Center view", &key_lookcenter);
         }
 
         if (gamemission == heretic || gamemission == hexen)
@@ -257,12 +258,6 @@ static void ConfigExtraKeys(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
         else if (gamemission == heretic || gamemission == hexen)
         {
             AddKeyControl(table, "Use artifact", &key_useartifact);
-        }
-
-        if (gamemission == doom)
-        {
-            AddKeyControl(table, "Drop backpack", &key_dropbackpack);
-            AddKeyControl(table, "Drop stimpack", &key_dropstimpack);
         }
 
         if (gamemission == heretic)
@@ -313,6 +308,14 @@ static void ConfigExtraKeys(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
     AddKeyControl(table, "Weapon 8", &key_weapon8);
     AddKeyControl(table, "Previous weapon", &key_prevweapon);
     AddKeyControl(table, "Next weapon", &key_nextweapon);
+
+    if (gamemission == doom)
+    {
+        AddSectionLabel(table, "Multiplayer", true);
+
+        AddKeyControl(table, "Drop backpack", &key_dropbackpack);
+        AddKeyControl(table, "Drop stimpack", &key_dropstimpack);
+    }
 }
 
 static void OtherKeysDialog(TXT_UNCAST_ARG(widget), TXT_UNCAST_ARG(unused))
