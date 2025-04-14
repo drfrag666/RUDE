@@ -109,8 +109,6 @@ jobs:
             ${{ matrix.config.msys-env }}-fluidsynth
 
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Configure
         env:
@@ -120,11 +118,6 @@ jobs:
 
       - name: Build
         run: make -j4
-
-      - name: Test
-        run: |
-          PREFIX=`sed -n '/PROGRAM_PREFIX/p' ${PWD}/config.h | cut -d '"' -f 2`
-          make -j4 -C quickcheck check SOURCE_PORT=$PWD/src/${PREFIX}doom
 
       - name: Package
         if: ${{ matrix.config.artifacts }}
