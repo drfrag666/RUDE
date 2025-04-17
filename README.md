@@ -1,6 +1,6 @@
 # RUDE: Romero's Ultimate Doom Engine
 
- RUDE is a fork of Chocolate Doom 3.0.0 with some stuff from Crispy Doom.
+ RUDE is a fork of Chocolate Doom 3.1.0 with some stuff from Crispy Doom.
  The name is some kind of play on words and stands for Romero's Ultimate Doom Engine and
 it's another tribute to John Romero. Easy to understand if you know my Romero's Heresy II
 project for Heretic. :)
@@ -12,7 +12,7 @@ remaining faithful to the original executables. There are a few new gameplay fea
  Please refer to the Chocolate Doom documentation.
  Also contains code from MBF and PrBoom+.
  Of course DOOM © 1996 id Software.
- Chocolate Doom © 2020 Simon Howard and Crispy Doom © 2020 Fabian Greffrath.
+ Chocolate Doom © 2024 Simon Howard and Crispy Doom © 2024 Fabian Greffrath.
 
 # New features:
 
@@ -22,14 +22,14 @@ remaining faithful to the original executables. There are a few new gameplay fea
  * Enable loading 16 bit RIFF wavs in .wads (SmileTheory).
  * Doom 1.0 and 1.1 emulation (SmileTheory).
  * Draw the player mugshot with max view.
- * Supports SIGIL (even multiplayer), E1M4b and E1M8b (Crispy).
- * Extended setup to support SIGIL and new features. Can warp to title.
+ * Supports SIGIL and SIGIL II (even multiplayer), E1M4b and E1M8b (Crispy).
+ * Extended setup to support SIGIL, SIGIL II and new features. Can warp to title.
  * There's a new 'Unholy massacre' skill level (-skill 6). :D Double monsters, lesser health pickups,
  zombiemen got a point blank attack, pistol with increased accuracy and damage, bumped minimum damage
  dealt for punch and you can eat gore when very low on health.
- * Replaced the Unholy Massacre title graphic. Thanks JNechaevsky!
- * Doom: remove SPECHIT limit (Crispy).
- * Doom: entirely remove INTERCEPTS limit (fixes all-ghosts bug).
+ * Replaced the Unholy Massacre title graphic. Thanks Julia Nechaevskaya!
+ * Remove SPECHIT limit (Crispy).
+ * Entirely remove INTERCEPTS limit (fixes all-ghosts bug).
  * Heretic: entirely remove INTERCEPTS and SPECHIT limits (Crispy).
  * Got rid of supersized PNGs (Crispy).
  * Fixed backpacks from Marshmallow (idea and bits of code):
@@ -54,9 +54,9 @@ remaining faithful to the original executables. There are a few new gameplay fea
  * Support for extended nodes (Crispy).
  * Autorun key (Crispy).
  * The startup console is back and with colored title, works from the Windows command line
- (thanks JNechaevsky for hint on colors).
+ (thanks Julia Nechaevskaya for hint on colors).
  * Fake splitscreen.
- * Added LCD gamma fix from Russian Doom using a darker palette by JNechaevsky.
+ * Added LCD gamma fix from Russian Doom using a custom darker palette by Julia Nechaevskaya.
  * New 'One thousand deaths await thee' skill level for Heretic. You take double damage, monsters
  got half hit points and half ammo for a more dynamic gameplay.
  * Removed limits for Heretic (Crispy).
@@ -67,13 +67,26 @@ remaining faithful to the original executables. There are a few new gameplay fea
  * Don't load Boom maps by default, only with the -boom parameter.
  * Fixed crash with invalid blockmap (DWHEEL.WAD).
  * Add FPS counter (AlexMax).
- * Always precache sounds (fabian, guarded with -noprecachesounds).
  * Display tally screen after ExM8 (Crispy).
  * Allow skipping the Doom finales.
  * Add the -noumskill parameter to prevent showing UM in the menu.
  * Many bugfixes from Crispy.
 
  Have fun!
+
+# Compiling on Windows
+
+ Dowload codeblocks-17.12mingw-setup.exe (to compile the 32 bit version), CMake 3.29, TortoiseGit and
+Git 64 bit versions.
+ In System advanced configuration add the MinGW binaries folder to the Path environment variable
+(here C:\DEV\CodeBlocks\MinGW\bin).
+ Select CodeBlocks - MinGW Makefiles in Cmake-GUI.
+ Download libraries to setup CMake-GUI: SDL2-devel-2.30.12-mingw.zip, SDL2_mixer-devel-2.8.1-mingw.zip,
+SDL2_net-devel-2.2.0-mingw.zip, libsamplerate-0.2.2-win32.zip, lpng1647.zip and
+fluidsynth-2.3.7-winXP-x86.zip.
+ Compile yourself libsamplerate, lpng and zlib.
+ Get the missing dlls from: SDL2-2.30.12-win32-x86.zip, SDL2_mixer-2.8.1-win32-x86.zip,
+SDL2_net-2.2.0-win32-x86.zip and crispy-doom-5.12.0-win32.zip.
 
 # Chocolate Doom
 
